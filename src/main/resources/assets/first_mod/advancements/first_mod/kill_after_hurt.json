@@ -1,0 +1,33 @@
+{
+  "display": {
+    "icon": {
+      "item": "first_mod:red_stone_helmet"
+    },
+    "title": {
+      "translate": "achievement.first_mod.red_stone_equip.title"
+    },
+    "description": {
+      "translate": "achievement.first_mod.red_stone_equip.description"
+    },
+    "show_toast": true,
+    "announce_to_chat": true,
+    "frame_type": "task"
+  },
+  "parent": "first_mod:first_mod/root",
+  "criteria": {
+    "killed": {
+      "trigger": "minecraft:player_killed_entity",
+      "conditions": {
+        "killing_blow": {
+          "bypasses_armor": true,
+          "entity": {
+            "type": "sword"
+          }
+        }
+      }
+    }
+  },
+  "rewards": {
+    "experience": 100
+  }
+}

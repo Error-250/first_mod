@@ -1,0 +1,13 @@
+{
+  "parent": "builtin/generated",
+  "textures": {
+    "layer0": "items/record_wait"
+  },
+  "display": {
+    "firstperson_righthand": {
+      "rotation": [ 0, -90, 25 ],
+      "translation": [ 0, 4, 2 ],
+      "scale": [ 0.5, 0.5, 0.5 ]
+    }
+  }
+}

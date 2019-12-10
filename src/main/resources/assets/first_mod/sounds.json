@@ -1,0 +1,12 @@
+{
+  "first_mod.dldl": {
+    "category": "record",
+    "subtitle": "",
+    "sounds": [
+      {
+        "name": "first_mod:dldl",
+        "stream": true
+      }
+    ]
+  }
+}

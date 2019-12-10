@@ -1,0 +1,13 @@
+物品模型:
+->ground: 在地上的时候的展示设置
+->thirdperson_righthand
+->thirdperson_lefthand
+->firstperson_righthand
+->firstperson_lefthand
+->gui
+->head
+->ground
+->fixed
+此时
+rotation 旋转多少, 在ground(地上)时, 会自动沿Z轴旋转, 所以设置z的值可以看到变化.
+translation设置scale大小后微调位置,让物品不至于出现一部分在地下的感觉

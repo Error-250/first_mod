@@ -1,0 +1,57 @@
+# items
+item.golden_egg.name=Golden Egg
+item.red_stone_pickaxe=Red Stone Pickaxe
+item.red_stone_apple=Red Stone Apple
+item.red_stone_helmet=Red Stone Helmet
+item.red_stone_chestplate=Red Stone Chestplate
+item.red_stone_legging=Red Stone Legging
+item.red_stone_boots=Red Stone Boots
+item.dldl_record.name=DoulouDalu Record
+item.record.dldl.desc=DoulouDalu
+item.mercury_bucket.name=Mercury Bucket
+
+# fluid
+fluid.mercury=Mercury
+
+# blocks
+tile.my_grass.name=My Grass Block
+tile.mercury_block.name=Mercury Block
+
+# enchantment
+enchantment.fire_burn=Fire Burn Enchantment Book
+
+# effect
+effect.fall_protect=Fall Protect
+
+# entity
+entity.golden_chicken.name=Golden Chicken
+
+# potion
+potion.effect.fall_protect=Fall Protect Potion
+lingering_potion.effect.fall_protect=Fall Protect Lingering Potion
+splash_potion.effect.fall_protect=Fall Protect Splash Potion
+tipped_arrow.effect.fall_protect=Fall Protect Tipped Arrow
+
+
+# creative tab
+itemGroup.first_mod=First Mod Creative tabs
+
+# death
+death.attack.power=%s was dead, because power
+
+# key
+key.first_mod.show_time=Show Time
+key.categories.first_mod=First Mod
+
+# chat
+chat.first_mod.time=The total world time is: %s.
+
+# achievement
+achievement.first_mod.root.title=A golden egg?
+achievement.first_mod.root.description=Have a golden egg.
+achievement.first_mod.red_stone_equip.title=Red stone equipment!
+achievement.first_mod.red_stone_equip.description=Kill entity equip with red_stone_helmet.
+
+# command
+commands.position.usage=/position [player]
+commands.position.success=The position of %1$s is %2$s in world %3$s

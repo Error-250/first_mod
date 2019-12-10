@@ -1,0 +1,29 @@
+{
+  "display": {
+    "icon": {
+      "item": "first_mod:golden_egg"
+    },
+    "title": {
+      "translate": "achievement.first_mod.root.title"
+    },
+    "description": {
+      "translate": "achievement.first_mod.root.description"
+    },
+    "background": "minecraft:textures/gui/advancements/backgrounds/stone.png",
+    "show_toast": true,
+    "announce_to_chat": true,
+    "frame_type": "task"
+  },
+  "criteria": {
+    "have a golden egg": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          {
+            "item": "first_mod:golden_egg"
+          }
+        ]
+      }
+    }
+  }
+}

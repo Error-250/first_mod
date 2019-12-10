@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "first_mod:blocks/my_grass"
+  }
+}
