@@ -1,5 +1,6 @@
 package com.wxp.firstmod.entity.model;
 
+import com.wxp.firstmod.entity.GoldenChickenEntity;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
@@ -80,16 +81,18 @@ public class GoldenChickenModel extends ModelBase {
       float headPitch,
       float scaleFactor,
       Entity entityIn) {
+    double wingSpeed = ((GoldenChickenEntity) entityIn).getWingSpeed();
+
     this.head.rotateAngleX = headPitch / (180F / (float) Math.PI);
     this.head.rotateAngleY = netHeadYaw / (180F / (float) Math.PI);
     this.bill.rotateAngleX = this.head.rotateAngleX;
     this.bill.rotateAngleY = this.head.rotateAngleY;
     this.chin.rotateAngleX = this.head.rotateAngleX;
     this.chin.rotateAngleY = this.head.rotateAngleY;
-    this.body.rotateAngleX = (float) (Math.PI / 2.0D);
+    this.body.rotateAngleX = ((float) Math.PI / 2.0F);
     this.rightLeg.rotateAngleX = MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
     this.leftLeg.rotateAngleX = -MathHelper.cos(limbSwing * 0.6662F) * 1.4F * limbSwingAmount;
-    this.rightWing.rotateAngleZ = 1.5F * ageInTicks;
-    this.leftWing.rotateAngleZ = -1.5F * ageInTicks;
+    this.rightWing.rotateAngleZ = (float) wingSpeed * ageInTicks;
+    this.leftWing.rotateAngleZ = (float) -wingSpeed * ageInTicks;
   }
 }

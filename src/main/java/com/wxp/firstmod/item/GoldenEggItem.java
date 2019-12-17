@@ -4,6 +4,7 @@ import com.wxp.firstmod.entity.GoldenChickenEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
@@ -23,6 +24,11 @@ public class GoldenEggItem extends Item {
   }
 
   @Override
+  public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
+    return super.onItemRightClick(worldIn, playerIn, handIn);
+  }
+
+  @Override
   public EnumActionResult onItemUse(
       EntityPlayer player,
       World worldIn,
@@ -37,7 +43,8 @@ public class GoldenEggItem extends Item {
       goldenChickenEntity.setPositionAndUpdate(
           pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
       worldIn.spawnEntity(goldenChickenEntity);
+      player.getHeldItemMainhand().shrink(1);
     }
-    return super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
+    return EnumActionResult.SUCCESS;
   }
 }
