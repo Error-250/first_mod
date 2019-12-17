@@ -2,6 +2,7 @@ package com.wxp.firstmod.entity;
 
 import com.wxp.firstmod.FirstMod;
 import com.wxp.firstmod.config.FirstModConfig;
+import com.wxp.firstmod.entity.ai.PickupBlockAi;
 import com.wxp.firstmod.manager.EntityManager;
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.entity.SharedMonsterAttributes;
@@ -38,6 +39,12 @@ public class GoldenChickenEntity extends EntityChicken {
   protected void entityInit() {
     super.entityInit();
     dataManager.register(wingSpeedData, 0f);
+  }
+
+  @Override
+  protected void initEntityAI() {
+    super.initEntityAI();
+    this.tasks.addTask(8, new PickupBlockAi(this));
   }
 
   @Override
