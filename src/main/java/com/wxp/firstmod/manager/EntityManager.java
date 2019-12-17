@@ -1,6 +1,7 @@
 package com.wxp.firstmod.manager;
 
 import com.wxp.firstmod.entity.GoldenChickenEntity;
+import com.wxp.firstmod.entity.GoldenEntityEgg;
 import net.minecraftforge.fml.common.registry.EntityEntry;
 
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class EntityManager {
     entities = new LinkedHashMap<>();
 
     entities.put(GoldenChickenEntity.class, GoldenChickenEntity.getEntity());
+    entities.put(GoldenEntityEgg.class, GoldenEntityEgg.getEntity());
   }
 
   public static Collection<EntityEntry> getInitializedEntity() {

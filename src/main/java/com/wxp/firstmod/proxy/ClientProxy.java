@@ -1,7 +1,9 @@
 package com.wxp.firstmod.proxy;
 
 import com.wxp.firstmod.entity.GoldenChickenEntity;
-import com.wxp.firstmod.entity.factory.GoldenChickenRenderFactory;
+import com.wxp.firstmod.entity.GoldenEntityEgg;
+import com.wxp.firstmod.entity.render.GoldenChickRender;
+import com.wxp.firstmod.entity.render.RenderGoldenEntityEgg;
 import com.wxp.firstmod.eventhandler.OreGenEventHandler;
 import com.wxp.firstmod.manager.CommandManager;
 import com.wxp.firstmod.register.CraftingRegister;
@@ -20,7 +22,9 @@ public class ClientProxy implements ModProxy {
   public void preInit(FMLPreInitializationEvent event) {
     FluidRegister.registerFluid();
     RenderingRegistry.registerEntityRenderingHandler(
-        GoldenChickenEntity.class, new GoldenChickenRenderFactory());
+        GoldenChickenEntity.class, GoldenChickRender::new);
+    RenderingRegistry.registerEntityRenderingHandler(
+        GoldenEntityEgg.class, RenderGoldenEntityEgg::new);
   }
 
   @Override
