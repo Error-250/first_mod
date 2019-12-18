@@ -1,15 +1,15 @@
 package com.wxp.firstmod.item;
 
-import com.wxp.firstmod.FirstMod;
-import com.wxp.firstmod.entity.GoldenChickenEntity;
 import com.wxp.firstmod.entity.GoldenEntityEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.StatList;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.EnumActionResult;
+import net.minecraft.util.EnumHand;
+import net.minecraft.util.SoundCategory;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -46,7 +46,6 @@ public class GoldenEggItem extends Item {
         0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
     if (!worldIn.isRemote) {
-      FirstMod.getLogger().info("Do it");
       GoldenEntityEgg entityEgg = new GoldenEntityEgg(worldIn, playerIn);
       entityEgg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
       worldIn.spawnEntity(entityEgg);
@@ -55,23 +54,4 @@ public class GoldenEggItem extends Item {
     playerIn.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
     return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
   }
-
-//  @Override
-//  public EnumActionResult onItemUse(
-//      EntityPlayer player,
-//      World worldIn,
-//      BlockPos pos,
-//      EnumHand hand,
-//      EnumFacing facing,
-//      float hitX,
-//      float hitY,
-//      float hitZ) {
-//    if (!worldIn.isRemote) {
-//      GoldenChickenEntity goldenChickenEntity = new GoldenChickenEntity(worldIn);
-//      goldenChickenEntity.setPositionAndUpdate(pos.getX() + 0.5, pos.getY() + 1, pos.getZ() + 0.5);
-//      worldIn.spawnEntity(goldenChickenEntity);
-//      player.getHeldItemMainhand().shrink(1);
-//    }
-//    return EnumActionResult.SUCCESS;
-//  }
 }

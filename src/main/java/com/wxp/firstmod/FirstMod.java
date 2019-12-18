@@ -44,6 +44,7 @@ public class FirstMod {
     GeneratorManager.initGenerator();
     EntityManager.initEntity();
     DamageSourceManager.initDamageSource();
+    FakePlayerManager.initFakePlayer();
   }
 
   @EventHandler
