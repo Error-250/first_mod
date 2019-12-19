@@ -1,0 +1,8 @@
+{
+  "parent": "block/orientable",
+  "textures": {
+    "top": "first_mod:blocks/metal_furnace_iron_side",
+    "front": "first_mod:blocks/metal_furnace_iron",
+    "side": "first_mod:blocks/metal_furnace_iron_side"
+  }
+}

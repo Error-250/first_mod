@@ -16,6 +16,8 @@ fluid.mercury=Mercury
 # blocks
 tile.my_grass.name=My Grass Block
 tile.mercury_block.name=Mercury Block
+tile.metal_furnace_iron.name=Iron Furnace
+tile.metal_furnace_golden.name=Golden Furnace
 
 # enchantment
 enchantment.fire_burn=Fire Burn Enchantment Book

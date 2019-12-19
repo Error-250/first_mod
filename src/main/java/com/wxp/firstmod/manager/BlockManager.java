@@ -2,6 +2,7 @@ package com.wxp.firstmod.manager;
 
 import com.wxp.firstmod.block.AbstractMyBlock;
 import com.wxp.firstmod.block.MercuryFluidBlock;
+import com.wxp.firstmod.block.MetalFurnaceBlock;
 import com.wxp.firstmod.block.MyGrassBlock;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
@@ -19,6 +20,10 @@ public class BlockManager {
     MyGrassBlock myGrassBlock = new MyGrassBlock();
     myGrassBlock.setCreativeTab(CreativeTabManager.firstModCreativeTab);
     blocks.put(myGrassBlock.getClass(), myGrassBlock);
+
+    MetalFurnaceBlock metalFurnaceBlock = new MetalFurnaceBlock();
+    metalFurnaceBlock.setCreativeTab(CreativeTabManager.firstModCreativeTab);
+    blocks.put(metalFurnaceBlock.getClass(), metalFurnaceBlock);
   }
 
   public static void initFluidBlock() {

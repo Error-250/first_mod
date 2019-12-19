@@ -1,0 +1,76 @@
+{
+  "variants": {
+    "burning=false,facing=east,material=gold": {
+      "model": "first_mod:metal_furnace_golden",
+      "y": 90,
+      "uvlock": true
+    },
+    "burning=true,facing=east,material=gold": {
+      "model": "first_mod:metal_furnace_golden_burning",
+      "y": 90,
+      "uvlock": true
+    },
+    "burning=false,facing=north,material=gold": {
+      "model": "first_mod:metal_furnace_golden"
+    },
+    "burning=true,facing=north,material=gold": {
+      "model": "first_mod:metal_furnace_golden_burning"
+    },
+    "burning=false,facing=south,material=gold": {
+      "model": "first_mod:metal_furnace_golden",
+      "y": 180,
+      "uvlock": true
+    },
+    "burning=true,facing=south,material=gold": {
+      "model": "first_mod:metal_furnace_golden_burning",
+      "y": 180,
+      "uvlock": true
+    },
+    "burning=false,facing=west,material=gold": {
+      "model": "first_mod:metal_furnace_golden",
+      "y": 270,
+      "uvlock": true
+    },
+    "burning=true,facing=west,material=gold": {
+      "model": "first_mod:metal_furnace_golden_burning",
+      "y": 270,
+      "uvlock": true
+    },
+    "burning=false,facing=east,material=iron": {
+      "model": "first_mod:metal_furnace_iron",
+      "y": 90,
+      "uvlock": true
+    },
+    "burning=true,facing=east,material=iron": {
+      "model": "first_mod:metal_furnace_iron_burning",
+      "y": 90,
+      "uvlock": true
+    },
+    "burning=false,facing=north,material=iron": {
+      "model": "first_mod:metal_furnace_iron"
+    },
+    "burning=true,facing=north,material=iron": {
+      "model": "first_mod:metal_furnace_iron_burning"
+    },
+    "burning=false,facing=south,material=iron": {
+      "model": "first_mod:metal_furnace_iron",
+      "y": 180,
+      "uvlock": true
+    },
+    "burning=true,facing=south,material=iron": {
+      "model": "first_mod:metal_furnace_iron_burning",
+      "y": 180,
+      "uvlock": true
+    },
+    "burning=false,facing=west,material=iron": {
+      "model": "first_mod:metal_furnace_iron",
+      "y": 270,
+      "uvlock": true
+    },
+    "burning=true,facing=west,material=iron": {
+      "model": "first_mod:metal_furnace_iron_burning",
+      "y": 270,
+      "uvlock": true
+    }
+  }
+}

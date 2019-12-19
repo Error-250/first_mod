@@ -16,6 +16,8 @@ fluid.mercury=水银
 # blocks
 tile.my_grass.name=我的草
 tile.mercury_block.name=水银方块
+tile.metal_furnace_iron.name=铁炉
+tile.metal_furnace_golden.name=金炉
 
 # enchantment
 enchantment.fire_burn=火焰灼烧

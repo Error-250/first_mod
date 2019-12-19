@@ -1,7 +1,9 @@
 package com.wxp.firstmod.eventhandler;
 
 import com.wxp.firstmod.FirstMod;
+import com.wxp.firstmod.block.AbstractMultiStateBlock;
 import com.wxp.firstmod.block.AbstractMyBlock;
+import com.wxp.firstmod.block.MetalFurnaceBlock;
 import com.wxp.firstmod.config.FirstModConfig;
 import com.wxp.firstmod.manager.*;
 import com.wxp.firstmod.potion.AbstractModPotion;
@@ -13,9 +15,11 @@ import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.client.renderer.block.statemap.StateMapperBase;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
@@ -119,11 +123,27 @@ public class RegisterEventHandler {
   private static void registerItemModel() {
     if (Side.CLIENT.equals(FMLCommonHandler.instance().getSide())) {
       FirstMod.getLogger().info("Register models");
+      NonNullList<ItemStack> subItems = NonNullList.create();
       for (Item item : ItemManager.getInitializedItems()) {
-        ModelLoader.setCustomModelResourceLocation(
-            item,
-            0,
-            new ModelResourceLocation(Objects.requireNonNull(item.getRegistryName()), "inventory"));
+        if (item instanceof AbstractMultiStateBlock.AbstractItemMultiTextureBlock) {
+          AbstractMultiStateBlock.AbstractItemMultiTextureBlock itemBlock =
+              (AbstractMultiStateBlock.AbstractItemMultiTextureBlock) item;
+          itemBlock.getSubItems(CreativeTabManager.firstModCreativeTab, subItems);
+          for (ItemStack itemStack : subItems) {
+            ModelLoader.setCustomModelResourceLocation(
+                itemStack.getItem(),
+                itemStack.getMetadata(),
+                new ModelResourceLocation(
+                    Objects.requireNonNull(itemBlock.getRegistryName(itemStack)), "inventory"));
+          }
+          subItems.clear();
+        } else {
+          ModelLoader.setCustomModelResourceLocation(
+              item,
+              0,
+              new ModelResourceLocation(
+                  Objects.requireNonNull(item.getRegistryName()), "inventory"));
+        }
       }
     } else {
       FirstMod.getLogger().info("Skip. Not run in server");
