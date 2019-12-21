@@ -1,6 +1,9 @@
 package com.wxp.firstmod.block;
 
+import com.wxp.firstmod.block.tileentity.MetalFurnaceTileEntity;
 import com.wxp.firstmod.manager.ItemManager;
+import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyBool;
@@ -12,21 +15,26 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.*;
 import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.text.TextComponentString;
 import net.minecraft.world.World;
+import net.minecraftforge.items.CapabilityItemHandler;
+import net.minecraftforge.items.IItemHandler;
+import net.minecraftforge.items.IItemHandlerModifiable;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 import java.util.Random;
 
 /** @author wxp */
-public class MetalFurnaceBlock extends AbstractMultiStateBlock {
+public class MetalFurnaceBlock extends AbstractMultiStateBlock implements ITileEntityProvider {
   private static final PropertyDirection FACING =
       PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
-  private static final PropertyBool BURNING = PropertyBool.create("burning");
-  private static final PropertyEnum<MaterialEnum> MATERIAL =
+  public static final PropertyBool BURNING = PropertyBool.create("burning");
+  public static final PropertyEnum<MaterialEnum> MATERIAL =
       PropertyEnum.create("material", MaterialEnum.class);
 
   public MetalFurnaceBlock() {
@@ -97,8 +105,48 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock {
       float hitX,
       float hitY,
       float hitZ) {
-    worldIn.setBlockState(pos, state.cycleProperty(BURNING));
+    if (!worldIn.isRemote) {
+      MetalFurnaceTileEntity tileEntity = (MetalFurnaceTileEntity) worldIn.getTileEntity(pos);
+      if (tileEntity == null) {
+        return Boolean.TRUE;
+      }
+      IItemHandler up =
+          tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+      IItemHandler down =
+          tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+      String msg = String.format("Up: %s, Down: %s", up.getStackInSlot(0), down.getStackInSlot(0));
+      playerIn.sendMessage(new TextComponentString(msg));
+    }
     return Boolean.TRUE;
+  }
+
+  @Override
+  public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
+    MetalFurnaceTileEntity tileEntity = (MetalFurnaceTileEntity) worldIn.getTileEntity(pos);
+
+    if (tileEntity == null) {
+      return;
+    }
+    IItemHandler up =
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
+    IItemHandler down =
+        tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
+
+    for (int i = up.getSlots() - 1; i >= 0; i--) {
+      if (!up.getStackInSlot(i).isEmpty()) {
+        Block.spawnAsEntity(worldIn, pos, up.getStackInSlot(i));
+        ((IItemHandlerModifiable) up).setStackInSlot(i, ItemStack.EMPTY);
+      }
+    }
+
+    for (int i = down.getSlots() - 1; i >= 0; i--) {
+      if (!down.getStackInSlot(i).isEmpty()) {
+        Block.spawnAsEntity(worldIn, pos, down.getStackInSlot(i));
+        ((IItemHandlerModifiable) down).setStackInSlot(i, ItemStack.EMPTY);
+      }
+    }
+
+    super.breakBlock(worldIn, pos, state);
   }
 
   @Override
@@ -174,6 +222,17 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock {
         .withProperty(MATERIAL, material)
         .withProperty(BURNING, burning)
         .withProperty(FACING, facing);
+  }
+
+  @Nullable
+  @Override
+  public TileEntity createNewTileEntity(World worldIn, int meta) {
+    return new MetalFurnaceTileEntity();
+  }
+
+  @Override
+  public boolean hasTileEntity(IBlockState state) {
+    return true;
   }
 
   public enum MaterialEnum implements IStringSerializable {

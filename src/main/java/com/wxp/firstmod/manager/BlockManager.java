@@ -4,6 +4,8 @@ import com.wxp.firstmod.block.AbstractMyBlock;
 import com.wxp.firstmod.block.MercuryFluidBlock;
 import com.wxp.firstmod.block.MetalFurnaceBlock;
 import com.wxp.firstmod.block.MyGrassBlock;
+import com.wxp.firstmod.block.tileentity.MetalFurnaceTileEntity;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
 import java.util.Collection;
@@ -14,6 +16,7 @@ import java.util.Map;
 public class BlockManager {
   private static Map<Class, AbstractMyBlock> blocks;
   private static Map<Class, BlockFluidClassic> fluidBlocks;
+  public static Map<Class<? extends TileEntity>, String> tileEntities;
 
   public static void initBlock() {
     blocks = new LinkedHashMap<>();
@@ -24,6 +27,9 @@ public class BlockManager {
     MetalFurnaceBlock metalFurnaceBlock = new MetalFurnaceBlock();
     metalFurnaceBlock.setCreativeTab(CreativeTabManager.firstModCreativeTab);
     blocks.put(metalFurnaceBlock.getClass(), metalFurnaceBlock);
+
+    tileEntities = new LinkedHashMap<>();
+    tileEntities.put(MetalFurnaceTileEntity.class, "metal_furnace_tile_entity");
   }
 
   public static void initFluidBlock() {

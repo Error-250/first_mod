@@ -19,6 +19,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionType;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
@@ -29,6 +30,7 @@ import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.EntityEntry;
+import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.relauncher.Side;
 
 import java.util.Map;
@@ -44,6 +46,7 @@ public class RegisterEventHandler {
     for (AbstractMyBlock block : BlockManager.getInitializedBlocks()) {
       event.getRegistry().register(block);
     }
+    registerTileEntity();
     for (BlockFluidClassic blockFluidClassic : BlockManager.getInitializedFluidBlocks()) {
       event.getRegistry().register(blockFluidClassic);
     }
@@ -96,6 +99,15 @@ public class RegisterEventHandler {
     FirstMod.getLogger().info("Register entity");
     for (EntityEntry entityEntry : EntityManager.getInitializedEntity()) {
       event.getRegistry().register(entityEntry);
+    }
+  }
+
+  private static void registerTileEntity() {
+    FirstMod.getLogger().info("Register tile entity");
+    for (Map.Entry<Class<? extends TileEntity>, String> entry :
+        BlockManager.tileEntities.entrySet()) {
+      GameRegistry.registerTileEntity(
+          entry.getKey(), new ResourceLocation(FirstModConfig.MOD_ID, entry.getValue()));
     }
   }
 
