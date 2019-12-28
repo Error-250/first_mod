@@ -1,11 +1,11 @@
 # items
 item.golden_egg.name=金蛋
-item.red_stone_pickaxe=红石镐
-item.red_stone_apple=红石苹果
-item.red_stone_helmet=红石帽子
-item.red_stone_chestplate=红石胸甲
-item.red_stone_legging=红石护腿
-item.red_stone_boots=红石靴子
+item.red_stone_pickaxe.name=红石镐
+item.red_stone_apple.name=红石苹果
+item.red_stone_helmet.name=红石帽子
+item.red_stone_chestplate.name=红石胸甲
+item.red_stone_legging.name=红石护腿
+item.red_stone_boots.name=红石靴子
 item.dldl_record.name=一梦繁唐唱片
 item.record.dldl.desc=一梦繁唐
 item.mercury_bucket.name=水银桶
@@ -16,8 +16,8 @@ fluid.mercury=水银
 # blocks
 tile.my_grass.name=我的草
 tile.mercury_block.name=水银方块
-tile.metal_furnace_iron.name=铁炉
-tile.metal_furnace_golden.name=金炉
+tile.iron_metal_furnace.name=铁炉
+tile.golden_metal_furnace.name=金炉
 
 # enchantment
 enchantment.fire_burn=火焰灼烧

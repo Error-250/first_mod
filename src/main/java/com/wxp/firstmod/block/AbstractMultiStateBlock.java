@@ -2,6 +2,8 @@ package com.wxp.firstmod.block;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.block.statemap.DefaultStateMapper;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -18,6 +20,14 @@ public abstract class AbstractMultiStateBlock extends AbstractMyBlock {
    */
   @Override
   public abstract AbstractItemMultiTextureBlock getItemBlock();
+
+  public IStateMapper getBlockStateMapper() {
+    return new DefaultStateMapper();
+  }
+
+  public boolean hasMultiModel() {
+    return false;
+  }
 
   public abstract static class AbstractItemMultiTextureBlock extends ItemBlock {
 

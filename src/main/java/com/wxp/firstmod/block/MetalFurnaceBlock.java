@@ -1,6 +1,7 @@
 package com.wxp.firstmod.block;
 
 import com.wxp.firstmod.block.tileentity.MetalFurnaceTileEntity;
+import com.wxp.firstmod.config.FirstModConfig;
 import com.wxp.firstmod.manager.ItemManager;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -11,6 +12,8 @@ import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.properties.PropertyEnum;
 import net.minecraft.block.state.BlockStateContainer;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.renderer.block.statemap.IStateMapper;
+import net.minecraft.client.renderer.block.statemap.StateMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,13 +39,14 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock implements ITileE
   public static final PropertyBool BURNING = PropertyBool.create("burning");
   public static final PropertyEnum<MaterialEnum> MATERIAL =
       PropertyEnum.create("material", MaterialEnum.class);
+  private final String name = "metal_furnace";
 
   public MetalFurnaceBlock() {
     super(Material.IRON);
-    setUnlocalizedName("metal_furnace");
+    setUnlocalizedName(name);
     setHardness(2.5f);
     setSoundType(SoundType.METAL);
-    setRegistryName("metal_furnace");
+    setRegistryName(name);
     setDefaultState(
         this.getBlockState()
             .getBaseState()
@@ -63,18 +67,18 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock implements ITileE
           @Override
           public String getRegistryName(ItemStack stack) {
             if ((stack.getMetadata() & 0b1000) == 0) {
-              return this.block.getRegistryName() + "_iron";
+              return new ResourceLocation(FirstModConfig.MOD_ID, "iron_" + name).toString();
             } else {
-              return this.block.getRegistryName() + "_golden";
+              return new ResourceLocation(FirstModConfig.MOD_ID, "golden_" + name).toString();
             }
           }
 
           @Override
           public String getUnlocalizedName(ItemStack stack) {
             if ((stack.getMetadata() & 0b1000) == 0) {
-              return this.block.getUnlocalizedName() + "_iron";
+              return "tile.iron_" + name;
             } else {
-              return this.block.getUnlocalizedName() + "_golden";
+              return "tile.golden_" + name;
             }
           }
 
@@ -215,13 +219,23 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock implements ITileE
 
   @Override
   public IBlockState getStateFromMeta(int meta) {
-    MaterialEnum material = (meta & 0b1000) == 0 ? MaterialEnum.IRON : MaterialEnum.GOLD;
+    MaterialEnum material = (meta & 0b1000) == 0 ? MaterialEnum.IRON : MaterialEnum.GOLDEN;
     boolean burning = (meta & 0b0100) != 0;
     EnumFacing facing = EnumFacing.getHorizontal(meta & 0b0011);
     return getDefaultState()
         .withProperty(MATERIAL, material)
         .withProperty(BURNING, burning)
         .withProperty(FACING, facing);
+  }
+
+  @Override
+  public boolean hasMultiModel() {
+    return Boolean.TRUE;
+  }
+
+  @Override
+  public IStateMapper getBlockStateMapper() {
+    return new StateMap.Builder().withName(MATERIAL).withSuffix("_metal_furnace").build();
   }
 
   @Nullable
@@ -239,7 +253,7 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock implements ITileE
     /** 铁 */
     IRON,
     /** 金 */
-    GOLD;
+    GOLDEN;
 
     @Override
     public String getName() {

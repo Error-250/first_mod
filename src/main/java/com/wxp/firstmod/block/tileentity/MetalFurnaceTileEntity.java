@@ -78,7 +78,7 @@ public class MetalFurnaceTileEntity extends TileEntity implements ITickable {
           case IRON:
             burnTotalTime = 150;
             break;
-          case GOLD:
+          case GOLDEN:
             burnTotalTime = 100;
             break;
           default:

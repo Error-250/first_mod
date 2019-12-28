@@ -1,0 +1,25 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "orientable",
+    "textures": {
+      "top": "first_mod:blocks/golden_metal_furnace_side",
+      "side": "first_mod:blocks/golden_metal_furnace_side"
+    }
+  },
+  "variants": {
+    "inventory": [{
+      "textures": { "front": "first_mod:blocks/golden_metal_furnace" }
+    }],
+    "burning": {
+      "true": { "textures": { "front": "first_mod:blocks/golden_metal_furnace_burning" } },
+      "false": { "textures": { "front": "first_mod:blocks/golden_metal_furnace" } }
+    },
+    "facing": {
+      "east": { "y": 90, "uvlock": true },
+      "north": {},
+      "south": { "y": 180, "uvlock": true },
+      "west": { "y": 270, "uvlock": true }
+    }
+  }
+}

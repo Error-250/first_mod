@@ -140,6 +140,10 @@ public class RegisterEventHandler {
         if (item instanceof AbstractMultiStateBlock.AbstractItemMultiTextureBlock) {
           AbstractMultiStateBlock.AbstractItemMultiTextureBlock itemBlock =
               (AbstractMultiStateBlock.AbstractItemMultiTextureBlock) item;
+          if(itemBlock.getBlock() instanceof AbstractMultiStateBlock) {
+            AbstractMultiStateBlock block = (AbstractMultiStateBlock) itemBlock.getBlock();
+            ModelLoader.setCustomStateMapper(block, block.getBlockStateMapper());
+          }
           itemBlock.getSubItems(CreativeTabManager.firstModCreativeTab, subItems);
           for (ItemStack itemStack : subItems) {
             ModelLoader.setCustomModelResourceLocation(

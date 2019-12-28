@@ -1,11 +1,11 @@
 # items
 item.golden_egg.name=Golden Egg
-item.red_stone_pickaxe=Red Stone Pickaxe
-item.red_stone_apple=Red Stone Apple
-item.red_stone_helmet=Red Stone Helmet
-item.red_stone_chestplate=Red Stone Chestplate
-item.red_stone_legging=Red Stone Legging
-item.red_stone_boots=Red Stone Boots
+item.red_stone_pickaxe.name=Red Stone Pickaxe
+item.red_stone_apple.name=Red Stone Apple
+item.red_stone_helmet.name=Red Stone Helmet
+item.red_stone_chestplate.name=Red Stone Chestplate
+item.red_stone_legging.name=Red Stone Legging
+item.red_stone_boots.name=Red Stone Boots
 item.dldl_record.name=DoulouDalu Record
 item.record.dldl.desc=DoulouDalu
 item.mercury_bucket.name=Mercury Bucket
@@ -16,8 +16,8 @@ fluid.mercury=Mercury
 # blocks
 tile.my_grass.name=My Grass Block
 tile.mercury_block.name=Mercury Block
-tile.metal_furnace_iron.name=Iron Furnace
-tile.metal_furnace_golden.name=Golden Furnace
+tile.iron_metal_furnace.name=Iron Furnace
+tile.golden_metal_furnace.name=Golden Furnace
 
 # enchantment
 enchantment.fire_burn=Fire Burn Enchantment Book
