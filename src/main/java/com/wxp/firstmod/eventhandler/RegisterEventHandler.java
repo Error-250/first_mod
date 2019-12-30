@@ -24,6 +24,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundEvent;
 import net.minecraftforge.client.model.ModelLoader;
+import net.minecraftforge.client.model.obj.OBJLoader;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fml.common.FMLCommonHandler;
@@ -43,6 +44,7 @@ public class RegisterEventHandler {
   @SubscribeEvent
   public static void registerBlocks(RegistryEvent.Register<Block> event) {
     FirstMod.getLogger().info("Register blocks");
+    OBJLoader.INSTANCE.addDomain(FirstModConfig.MOD_ID);
     for (AbstractMyBlock block : BlockManager.getInitializedBlocks()) {
       event.getRegistry().register(block);
     }

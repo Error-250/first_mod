@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "first_mod:obj_metal_furnace.obj"
+  },
+  "variants": {
+    "inventory": [{
+      "textures": { "#cylinder": "first_mod:blocks/iron_obj_metal_furnace" }
+    }],
+    "burning": {
+      "true": { "textures": { "#cylinder": "first_mod:blocks/iron_obj_metal_furnace_burning" } },
+      "false": { "textures": { "#cylinder": "first_mod:blocks/iron_obj_metal_furnace" } }
+    }
+  }
+}

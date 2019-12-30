@@ -1,10 +1,8 @@
 package com.wxp.firstmod.manager;
 
-import com.wxp.firstmod.block.AbstractMyBlock;
-import com.wxp.firstmod.block.MercuryFluidBlock;
-import com.wxp.firstmod.block.MetalFurnaceBlock;
-import com.wxp.firstmod.block.MyGrassBlock;
+import com.wxp.firstmod.block.*;
 import com.wxp.firstmod.block.tileentity.MetalFurnaceTileEntity;
+import com.wxp.firstmod.block.tileentity.ObjMetalFurnaceTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
@@ -27,9 +25,13 @@ public class BlockManager {
     MetalFurnaceBlock metalFurnaceBlock = new MetalFurnaceBlock();
     metalFurnaceBlock.setCreativeTab(CreativeTabManager.firstModCreativeTab);
     blocks.put(metalFurnaceBlock.getClass(), metalFurnaceBlock);
+    ObjMetalFurnaceBlock objMetalFurnaceBlock = new ObjMetalFurnaceBlock();
+    objMetalFurnaceBlock.setCreativeTab(CreativeTabManager.firstModCreativeTab);
+    blocks.put(objMetalFurnaceBlock.getClass(), objMetalFurnaceBlock);
 
     tileEntities = new LinkedHashMap<>();
     tileEntities.put(MetalFurnaceTileEntity.class, "metal_furnace_tile_entity");
+    tileEntities.put(ObjMetalFurnaceTileEntity.class, "obj_metal_furnace_tile_entity");
   }
 
   public static void initFluidBlock() {
