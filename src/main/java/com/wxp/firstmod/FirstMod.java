@@ -46,6 +46,7 @@ public class FirstMod {
     DamageSourceManager.initDamageSource();
     FakePlayerManager.initFakePlayer();
     CapabilityManager.initCapability();
+    NetworkManager.initNetwork();
   }
 
   @EventHandler

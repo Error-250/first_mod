@@ -1,19 +1,28 @@
 package com.wxp.firstmod.eventhandler;
 
+import com.wxp.firstmod.capability.PositionHistoryCap;
 import com.wxp.firstmod.capability.provider.PositionHistoryProvider;
+import com.wxp.firstmod.capability.storage.PositionHistoryStorage;
 import com.wxp.firstmod.config.FirstModConfig;
 import com.wxp.firstmod.damagesource.PowerDamageSource;
 import com.wxp.firstmod.item.RedStoneArmorItem;
+import com.wxp.firstmod.manager.CapabilityManager;
 import com.wxp.firstmod.manager.DamageSourceManager;
+import com.wxp.firstmod.manager.NetworkManager;
 import com.wxp.firstmod.manager.PotionManager;
+import com.wxp.firstmod.network.PositionHistoryMessage;
 import com.wxp.firstmod.potion.FallProtectPotion;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
+import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -70,6 +79,26 @@ public class PlayerEventHandler {
       PositionHistoryProvider positionHistoryProvider = new PositionHistoryProvider();
       event.addCapability(
           new ResourceLocation(FirstModConfig.MOD_ID, "position_history"), positionHistoryProvider);
+    }
+  }
+
+  @SubscribeEvent
+  public static void onPlayerJoinWorld(EntityJoinWorldEvent event) {
+    if (!event.getWorld().isRemote && event.getEntity() instanceof EntityPlayer) {
+      EntityPlayerMP player = (EntityPlayerMP) event.getEntity();
+      if (player.hasCapability(CapabilityManager.positionHistory, null)) {
+        PositionHistoryCap positionHistoryCap =
+            player.getCapability(CapabilityManager.positionHistory, null);
+        PositionHistoryStorage positionHistoryStorage =
+            (PositionHistoryStorage) CapabilityManager.positionHistory.getStorage();
+        NBTBase base =
+            positionHistoryStorage.writeNBT(
+                CapabilityManager.positionHistory, positionHistoryCap, null);
+        NBTTagCompound nbtTagCompound = new NBTTagCompound();
+        nbtTagCompound.setTag("histories", base);
+        PositionHistoryMessage message = new PositionHistoryMessage(nbtTagCompound);
+        NetworkManager.simpleNetworkWrapper.sendTo(message, player);
+      }
     }
   }
 }

@@ -2,12 +2,17 @@ package com.wxp.firstmod.command;
 
 import com.wxp.firstmod.FirstMod;
 import com.wxp.firstmod.capability.PositionHistoryCap;
+import com.wxp.firstmod.capability.storage.PositionHistoryStorage;
 import com.wxp.firstmod.manager.CapabilityManager;
+import com.wxp.firstmod.manager.NetworkManager;
+import com.wxp.firstmod.network.PositionHistoryMessage;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.command.WrongUsageException;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.nbt.NBTBase;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -49,6 +54,14 @@ public class PotionCommand extends CommandBase {
         sender.sendMessage(new TextComponentString(vector3d.toString()));
       }
       positionHistoryCap.savePosition(vec3d);
+
+      PositionHistoryStorage storage =
+          (PositionHistoryStorage) CapabilityManager.positionHistory.getStorage();
+      NBTBase base = storage.writeNBT(CapabilityManager.positionHistory, positionHistoryCap, null);
+      NBTTagCompound nbtTagCompound = new NBTTagCompound();
+      nbtTagCompound.setTag("histories", base);
+      PositionHistoryMessage message = new PositionHistoryMessage(nbtTagCompound);
+      NetworkManager.simpleNetworkWrapper.sendTo(message, playerMP);
     }
     sender.sendMessage(
         new TextComponentTranslation(

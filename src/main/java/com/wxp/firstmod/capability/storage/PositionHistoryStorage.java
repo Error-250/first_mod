@@ -9,7 +9,6 @@ import net.minecraft.util.math.Vec3d;
 import net.minecraftforge.common.capabilities.Capability;
 
 import javax.annotation.Nullable;
-import java.util.Iterator;
 
 /** @author wxp */
 public class PositionHistoryStorage implements Capability.IStorage<PositionHistoryCap> {

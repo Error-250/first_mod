@@ -1,5 +1,6 @@
 package com.wxp.firstmod.capability.provider;
 
+import com.wxp.firstmod.FirstMod;
 import com.wxp.firstmod.capability.PositionHistoryCap;
 import com.wxp.firstmod.capability.impl.PositionHistoryCapImpl;
 import com.wxp.firstmod.capability.storage.PositionHistoryStorage;
@@ -46,7 +47,8 @@ public class PositionHistoryProvider implements ICapabilitySerializable {
   @Override
   public void deserializeNBT(NBTBase nbt) {
     NBTTagCompound compound = (NBTTagCompound) nbt;
-    NBTTagList list = (NBTTagList) compound.getTag("histories");
+    NBTTagList list = (NBTTagList) compound.getTag("position_history");
+    FirstMod.getLogger().info("deserialize {}", list);
     storage.readNBT(CapabilityManager.positionHistory, positionHistoryCap, null, list);
   }
 }
