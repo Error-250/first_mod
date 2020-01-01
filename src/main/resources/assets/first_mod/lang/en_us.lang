@@ -55,6 +55,8 @@ achievement.first_mod.red_stone_equip.title=Red stone equipment!
 achievement.first_mod.red_stone_equip.description=Kill entity equip with red_stone_helmet.
 
 # command
-commands.position.usage=/position [player]
+commands.position.usage=/position [player]/ world [list, global, dimension]
 commands.position.history=Position query history:
 commands.position.success=The position of %1$s is %2$s in world %3$s
+commands.position.list=position %s of %s
+commands.position.save=position %s saved
