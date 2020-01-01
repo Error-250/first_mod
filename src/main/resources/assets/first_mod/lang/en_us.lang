@@ -56,4 +56,5 @@ achievement.first_mod.red_stone_equip.description=Kill entity equip with red_sto
 
 # command
 commands.position.usage=/position [player]
+commands.position.history=Position query history:
 commands.position.success=The position of %1$s is %2$s in world %3$s

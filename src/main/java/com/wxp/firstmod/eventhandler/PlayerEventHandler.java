@@ -1,15 +1,19 @@
 package com.wxp.firstmod.eventhandler;
 
+import com.wxp.firstmod.capability.provider.PositionHistoryProvider;
 import com.wxp.firstmod.config.FirstModConfig;
 import com.wxp.firstmod.damagesource.PowerDamageSource;
 import com.wxp.firstmod.item.RedStoneArmorItem;
 import com.wxp.firstmod.manager.DamageSourceManager;
 import com.wxp.firstmod.manager.PotionManager;
 import com.wxp.firstmod.potion.FallProtectPotion;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.AttackEntityEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -56,6 +60,16 @@ public class PlayerEventHandler {
           event.setAmount(0f);
         }
       }
+    }
+  }
+
+  @SubscribeEvent
+  public static void onAttachCapabilitiesEntity(AttachCapabilitiesEvent<Entity> event) {
+    Entity entity = event.getObject();
+    if (entity instanceof EntityPlayer) {
+      PositionHistoryProvider positionHistoryProvider = new PositionHistoryProvider();
+      event.addCapability(
+          new ResourceLocation(FirstModConfig.MOD_ID, "position_history"), positionHistoryProvider);
     }
   }
 }
