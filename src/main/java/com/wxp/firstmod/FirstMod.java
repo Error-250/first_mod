@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.event.FMLConstructionEvent;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.common.network.IGuiHandler;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import org.apache.logging.log4j.Logger;
 
 /** @author wxp */
@@ -19,6 +21,9 @@ import org.apache.logging.log4j.Logger;
     version = FirstModConfig.VERSION)
 public class FirstMod {
   private static Logger logger;
+
+  @Mod.Instance(FirstModConfig.MOD_ID)
+  public static FirstMod INSTANCE;
 
   @SidedProxy(
       clientSide = "com.wxp.firstmod.proxy.ClientProxy",
@@ -59,6 +64,9 @@ public class FirstMod {
   public void init(FMLInitializationEvent event) {
     logger.info("Init");
     modProxy.init(event);
+    for (IGuiHandler handler : NetworkManager.getInitializedGui()) {
+      NetworkRegistry.INSTANCE.registerGuiHandler(INSTANCE, handler);
+    }
   }
 
   public static Logger getLogger() {

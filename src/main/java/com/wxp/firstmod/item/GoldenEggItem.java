@@ -1,5 +1,6 @@
 package com.wxp.firstmod.item;
 
+import com.wxp.firstmod.FirstMod;
 import com.wxp.firstmod.entity.GoldenEntityEgg;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.SoundEvents;
@@ -10,6 +11,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.SoundCategory;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.Objects;
@@ -49,6 +51,11 @@ public class GoldenEggItem extends Item {
       GoldenEntityEgg entityEgg = new GoldenEntityEgg(worldIn, playerIn);
       entityEgg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
       worldIn.spawnEntity(entityEgg);
+      if (playerIn.isSneaking()) {
+        BlockPos blockPos = playerIn.getPosition();
+        playerIn.openGui(
+            FirstMod.INSTANCE, 1, worldIn, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+      }
     }
 
     playerIn.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
