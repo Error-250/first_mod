@@ -37,28 +37,34 @@ public class GoldenEggItem extends Item {
       itemstack.shrink(1);
     }
 
-    worldIn.playSound(
-        null,
-        playerIn.posX,
-        playerIn.posY,
-        playerIn.posZ,
-        SoundEvents.ENTITY_EGG_THROW,
-        SoundCategory.PLAYERS,
-        0.5F,
-        0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+    boolean isThrow = false;
 
     if (!worldIn.isRemote) {
-      GoldenEntityEgg entityEgg = new GoldenEntityEgg(worldIn, playerIn);
-      entityEgg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
-      worldIn.spawnEntity(entityEgg);
       if (playerIn.isSneaking()) {
         BlockPos blockPos = playerIn.getPosition();
         playerIn.openGui(
             FirstMod.INSTANCE, 1, worldIn, blockPos.getX(), blockPos.getY(), blockPos.getZ());
+      } else {
+        GoldenEntityEgg entityEgg = new GoldenEntityEgg(worldIn, playerIn);
+        entityEgg.shoot(playerIn, playerIn.rotationPitch, playerIn.rotationYaw, 0.0F, 1.5F, 1.0F);
+        worldIn.spawnEntity(entityEgg);
+        isThrow = true;
       }
     }
 
-    playerIn.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
+    if (isThrow) {
+      worldIn.playSound(
+          null,
+          playerIn.posX,
+          playerIn.posY,
+          playerIn.posZ,
+          SoundEvents.ENTITY_EGG_THROW,
+          SoundCategory.PLAYERS,
+          0.5F,
+          0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+
+      playerIn.addStat(Objects.requireNonNull(StatList.getObjectUseStats(this)));
+    }
     return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
   }
 }

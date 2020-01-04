@@ -60,3 +60,6 @@ commands.position.history=Position query history:
 commands.position.success=The position of %1$s is %2$s in world %3$s
 commands.position.list=position %s of %s
 commands.position.save=position %s saved
+
+# gui
+container.first_gui=First Gui
