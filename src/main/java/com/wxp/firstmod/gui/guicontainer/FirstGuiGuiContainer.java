@@ -8,9 +8,13 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.init.Items;
+import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.text.TextComponentTranslation;
+
+import java.io.IOException;
 
 /** @author wxp */
 public class FirstGuiGuiContainer extends GuiContainer {
@@ -93,5 +97,24 @@ public class FirstGuiGuiContainer extends GuiContainer {
             }
           }
         });
+  }
+
+  @Override
+  protected void actionPerformed(GuiButton button) throws IOException {
+    FirstGuiContainer firstGuiContainer = (FirstGuiContainer) this.inventorySlots;
+    Slot ironSlot = firstGuiContainer.getIronSlot();
+    ItemStack itemStack = ironSlot.getStack();
+    int amount = itemStack.isEmpty() ? 0 : itemStack.getCount();
+    if (button.id == 0) {
+      amount = (amount + 1) % 65;
+    }
+    if (button.id == 1) {
+      amount = amount - 1;
+      if (amount == -1) {
+        amount = 64;
+      }
+    }
+    ironSlot.putStack(new ItemStack(Items.IRON_INGOT, amount));
+    super.actionPerformed(button);
   }
 }
