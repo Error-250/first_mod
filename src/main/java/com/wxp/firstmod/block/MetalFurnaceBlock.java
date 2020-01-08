@@ -1,5 +1,6 @@
 package com.wxp.firstmod.block;
 
+import com.wxp.firstmod.FirstMod;
 import com.wxp.firstmod.block.tileentity.MetalFurnaceTileEntity;
 import com.wxp.firstmod.config.FirstModConfig;
 import com.wxp.firstmod.manager.ItemManager;
@@ -110,16 +111,7 @@ public class MetalFurnaceBlock extends AbstractMultiStateBlock implements ITileE
       float hitY,
       float hitZ) {
     if (!worldIn.isRemote) {
-      MetalFurnaceTileEntity tileEntity = (MetalFurnaceTileEntity) worldIn.getTileEntity(pos);
-      if (tileEntity == null) {
-        return Boolean.TRUE;
-      }
-      IItemHandler up =
-          tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.UP);
-      IItemHandler down =
-          tileEntity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, EnumFacing.DOWN);
-      String msg = String.format("Up: %s, Down: %s", up.getStackInSlot(0), down.getStackInSlot(0));
-      playerIn.sendMessage(new TextComponentString(msg));
+      playerIn.openGui(FirstMod.INSTANCE, 2, worldIn, pos.getX(), pos.getY(), pos.getZ());
     }
     return Boolean.TRUE;
   }

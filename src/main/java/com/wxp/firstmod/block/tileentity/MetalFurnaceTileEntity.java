@@ -60,7 +60,8 @@ public class MetalFurnaceTileEntity extends TileEntity implements ITickable {
   }
 
   @Override
-  public boolean shouldRefresh(World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
+  public boolean shouldRefresh(
+      World world, BlockPos pos, IBlockState oldState, IBlockState newSate) {
     return oldState.getBlock() != newSate.getBlock();
   }
 
@@ -95,6 +96,22 @@ public class MetalFurnaceTileEntity extends TileEntity implements ITickable {
       } else {
         this.world.setBlockState(pos, state.withProperty(MetalFurnaceBlock.BURNING, Boolean.FALSE));
       }
+    }
+  }
+
+  public int getBurnTime() {
+    return burnTime;
+  }
+
+  public int getTotalBurnTime() {
+    IBlockState state = this.world.getBlockState(this.pos);
+    switch (state.getValue(MetalFurnaceBlock.MATERIAL)) {
+      case IRON:
+        return 150;
+      case GOLDEN:
+        return 100;
+      default:
+        return 200;
     }
   }
 }
